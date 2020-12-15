@@ -9,6 +9,7 @@ const Movies = () => {
 
   useEffect(() => {
     setMovies(MovieService.getMovies());
+    $("#success-alert").hide();
   }, []);
 
   const addMovie = (movie) => {
@@ -21,10 +22,25 @@ const Movies = () => {
     MovieService.deleteMovie(id);
   }
 
+  const rateMovie = (id, rating) => {
+    const movieToRate = movies.find(movie => movie.id === id);
+    movieToRate.ratings.push(rating);
+    setMovies(movies.map(movie => movie.id === id ? movieToRate : movie));
+    MovieService.setMovies(movies);
+
+    $("#success-alert").fadeTo(2000, 800).slideUp(800, function() {
+      $("#success-alert").slideUp(800);
+    });
+  }
+
   return (
     <div className="container-fluid">
-      <AddMovieButton addMovie={addMovie} moviesLength={movies.length} />
-      <MovieList movies={movies} deleteMovie={deleteMovie} />
+      <AddMovieButton addMovie={addMovie} />
+      <MovieList movies={movies} deleteMovie={deleteMovie} rateMovie={rateMovie} />
+      <div className="alert alert-success bottom-right-alert" id="success-alert" role="alert">
+        <h4 className="alert-heading">Well done!</h4>
+        <p>You have rated movie successfully.</p>
+      </div>
     </div>
   );
 }

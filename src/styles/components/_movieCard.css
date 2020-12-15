@@ -26,3 +26,10 @@
 .grow:hover {
     transform: scale(1.15);
  }
+
+ .bottom-right-alert {
+    position:absolute;
+    bottom:0;
+    right:1%;
+    max-width: 30%;
+ }

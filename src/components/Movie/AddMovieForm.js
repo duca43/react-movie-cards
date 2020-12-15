@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddMovieForm = ({addMovie, moviesLength}) => {
+const AddMovieForm = ({addMovie}) => {
 
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
@@ -16,14 +16,25 @@ const AddMovieForm = ({addMovie, moviesLength}) => {
             return;
         }
 
+        let idCounter = localStorage.getItem('idCounter');
+
+        if (!idCounter) {
+            idCounter = JSON.parse(localStorage.getItem('movies')).length;
+            localStorage.setItem('idCounter', idCounter);
+        }
+
+        idCounter = parseInt(idCounter, 10) + 1;
         const movie = {
-            id: (moviesLength + 1) * 100,
+            id: idCounter * 100,
             title: title,
             subtitle: subtitle,
             description: description,
             imageUrl: imageUrl,
             ratings: []
         }
+
+        localStorage.setItem('idCounter', idCounter);
+
         addMovie(movie);
 
         //reset both form and state

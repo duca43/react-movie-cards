@@ -16,10 +16,15 @@ const Movies = () => {
     MovieService.addMovie(movie);
   }
 
+  const deleteMovie = (id) => {
+    setMovies(movies.filter(movie => movie.id !== id));
+    MovieService.deleteMovie(id);
+  }
+
   return (
     <div className="container-fluid">
       <AddMovieButton addMovie={addMovie} moviesLength={movies.length} />
-      <MovieList movies={movies} />
+      <MovieList movies={movies} deleteMovie={deleteMovie} />
     </div>
   );
 }

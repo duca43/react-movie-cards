@@ -3,7 +3,7 @@ import moviesFromJson from './movies.json';
 export default class MovieService {
   static getMovies() {
     let movies = JSON.parse(localStorage.getItem('movies'));
-    if (!movies || movies.length === 0) {
+    if (!movies) {
         this.setMovies(moviesFromJson);
         return moviesFromJson;
     }
@@ -17,6 +17,11 @@ export default class MovieService {
   static addMovie(movie) {
     let movies = this.getMovies();
     movies.push(movie);
+    this.setMovies(movies);
+  }
+
+  static deleteMovie(id) {
+    let movies = this.getMovies().filter(movie => movie.id !== id);
     this.setMovies(movies);
   }
 }

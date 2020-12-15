@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 import StarRating from '../StarRating';
 
-const MovieCard = ({ movie }) => (
+const MovieCard = ({ movie, deleteMovie }) => (
   <div className="movie-card">
     <div className="movie-card card">
-      <img className="card-img-top" src={movie.imageUrl} alt="" />
+      <div>
+        <button className="btn badge badge-danger badge-pill float-right delete-badge grow" onClick={() => deleteMovie(movie.id)}>
+              <i className="fa fa-times"></i>
+            </button>
+        <img className="card-img-top" src={movie.imageUrl} alt="" />
+      </div>
       <div className="card-body">
         <h4 className="card-title">{movie.title}</h4>
         <h6 className="card-subtitle mb-2 text-muted">{movie.subtitle}</h6>
@@ -15,11 +20,13 @@ const MovieCard = ({ movie }) => (
         </p>
       </div>
       <div className="card-footer">
-        <div className="clearfix">
-          <div className="float-left mt-1">
-            <StarRating rating={movie.rating} />
+        <div className="row justify-content-between my-1">
+          <div className="ml-2">
+            <StarRating rating={0} />
           </div>
-          <div className="card-footer-badge float-right badge badge-primary badge-pill">{movie.rating}</div>
+          <div>
+            <div className="card-footer-badge badge badge-primary badge-pill mx-3">{0}</div>
+          </div>
         </div>
       </div>
     </div>

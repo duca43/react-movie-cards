@@ -8,9 +8,7 @@ const title = 'React Movie Cards';
 const App = () => (
   <div>
     <Header title={title} />
-    <div className="mt-5">
-      <Movies />
-    </div>
+    <Movies />
   </div>
 );
 

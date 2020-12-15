@@ -13,6 +13,7 @@ const Movies = () => {
 
   const addMovie = (movie) => {
     setMovies(movies.concat(movie));
+    MovieService.addMovie(movie);
   }
 
   return (
